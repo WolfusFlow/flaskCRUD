@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <style>
+            body{
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;                
+                text-align: center;
+                background-color: dimgray;
+            }
+            .textShadow{
+                text-shadow: 0.5px 1px cyan;
+            }
+            .yourBooks{
+                background: cadetblue;
+                color: burlywood
+            }
+            .inlile{
+                display: inline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="textShadow">Welcome to your own library!</h1>
+        <h3 class="textShadow">You can store here titles of books that you want to read in future</h3>
+        <div>
+            <h2 class="textShadow">Add your books</h2>
+            <form action="/" method="post">
+               <input type="text" name="title"/>
+               <input type="submit" value="insert"/>
+            </form>
+        </div>
+        <div class="yourBooks">
+            <h2>Your books:</h2>
+            <table>
+            {% for book in books %}
+            <tr>
+                <td>
+            <form class="inlile">
+            <p>{{book.title}}</p>
+            </form>
+            </td>
+            <td>
+            <form method="POST" action="./update" class="inlile">
+                <input type="hidden" value="{{book.title}}" name="oldTitle"/>
+                <input type="text" value="{{book.title}}" name="newTitle"/>
+                <input type="submit" value="Update"/>
+            </form>
+            </td>
+            <td>
+            <form method="POST" action="./delete" class="inlile">
+                <input type="hidden" value="{{book.title}}" name="delTitle"/>
+                <input type="submit" value="delete"/>
+            </form>
+            </td>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
